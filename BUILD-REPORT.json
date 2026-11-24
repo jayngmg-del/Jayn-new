@@ -1,0 +1,159 @@
+{
+  "project": "JG CONFIG STUDIO",
+  "build": "rebuild-2026-11-25",
+  "package_layout": {
+    "entry": "index.html",
+    "assets_directory": "assets/",
+    "asset_count": 8,
+    "root_level_nesting": "none"
+  },
+  "index": {
+    "bytes": 2088052,
+    "sha256": "d195c0a2ead45a62b89e6e9701184d83c2eb29af76273e0f4a2cab14e58887d2",
+    "css_unchanged": true,
+    "only_changed_embedded_scripts": [
+      3,
+      4
+    ],
+    "embedded_script_count": 7,
+    "all_embedded_scripts_syntax": "passed"
+  },
+  "fixes": [
+    {
+      "issue": "HTML mengakses payload melalui assets/ tetapi ZIP sumber meletakkan payload di root.",
+      "fix": "Semua 8 aset dipindahkan ke assets/; index.html tetap di root.",
+      "validation": "Semua 8 URL aset dan index.html mendapat HTTP 200; ukuran respons cocok."
+    },
+    {
+      "issue": "URL Blob Worker dicabut segera setelah Worker dibuat sehingga ada risiko race saat perangkat lambat memuat skrip Worker.",
+      "fix": "URL Worker kini dicabut setelah Worker mulai membalas atau saat cleanup/error/cancel; jika konstruktor gagal, URL langsung dicabut.",
+      "validation": "Script checks passed; kedua jalur Worker dipakai dalam tes worker/runtime."
+    },
+    {
+      "issue": "BUILD-REPORT lama memuat hash/ekstensi yang tidak cocok dengan HTML dan file aktual.",
+      "fix": "Laporan build dibuat ulang berdasarkan hash final dan ekstensi aktual.",
+      "validation": "Hash laporan cocok dengan file paket final."
+    }
+  ],
+  "validation_round_1": {
+    "description": "Pemeriksaan statis, integritas data dan kecocokan katalog.",
+    "html_embedded_js_syntax": "7/7 passed",
+    "referenced_asset_paths": "8/8 found",
+    "asset_hashes_vs_original": "8/8 identical",
+    "css_hash_unchanged": true,
+    "ignis_runtime_gzip": "passed; decompressed 44,789,501 bytes",
+    "alok_wardrobe_gzip": "passed; decompressed 709,262 bytes",
+    "alok_export_split_gzip": "passed when chunks are concatenated in order; decompressed 35,202,712 bytes",
+    "alok_ui_items": "170/170 IDs and labels match engine catalog; patch/object references checked for normal and max",
+    "alok_version_flags": "all checked flags match android-normal/android-max inventory",
+    "ignis_ui_items": "119/119 selections pass inspectSelection for both android platforms"
+  },
+  "validation_round_2": {
+    "description": "Uji runtime dan proses ekspor melalui kode mesin dan worker.",
+    "ignis_worker_bridge": "passed",
+    "ignis_default_android_ff_ori": {
+      "zip_bytes": 1518221,
+      "bundle_bytes": 1779962,
+      "bundle_magic": "UnityFS",
+      "oversized_count": 0,
+      "elapsed_seconds_host": 3.534,
+      "zip_integrity": "passed"
+    },
+    "ignis_default_android_ff_max": {
+      "zip_bytes": 1483422,
+      "bundle_bytes": 1856081,
+      "bundle_magic": "UnityFS",
+      "oversized_count": 0,
+      "elapsed_seconds_host": 6.228,
+      "zip_integrity": "passed"
+    },
+    "ignis_custom_all_seven_groups_android_ff_ori": {
+      "zip_bytes": 1258495,
+      "bundle_bytes": 1779962,
+      "bundle_magic": "UnityFS",
+      "oversized_count": 0,
+      "elapsed_seconds_host": 13.59,
+      "zip_integrity": "passed"
+    },
+    "ignis_custom_all_seven_groups_android_ff_max": {
+      "zip_bytes": 1262594,
+      "bundle_bytes": 1856081,
+      "bundle_magic": "UnityFS",
+      "oversized_count": 0,
+      "elapsed_seconds_host": 14.011,
+      "zip_integrity": "passed"
+    },
+    "alok_default_android_normal": {
+      "zip_bytes": 1896335,
+      "bundle_bytes": 1895777,
+      "bundle_magic": "UnityFS",
+      "zip_crc": "passed",
+      "elapsed_seconds_host": 4.393
+    },
+    "alok_default_android_max": {
+      "zip_bytes": 1893272,
+      "bundle_bytes": 1892716,
+      "bundle_magic": "UnityFS",
+      "zip_crc": "passed",
+      "elapsed_seconds_host": 3.986
+    },
+    "alok_custom_seven_groups": "passed for android-normal and android-max; output bundle byte-size constraints held; zip CRC passed"
+  },
+  "http_path_validation": {
+    "server": "local static HTTP test",
+    "index_and_assets": "9/9 HTTP 200",
+    "all_content_lengths_match_files": true
+  },
+  "performance_notes": {
+    "ignis_first_load_payload_bytes": 76041253,
+    "alok_export_payload_bytes": 26818845,
+    "recommendation": "Pertahankan pemuatan katalog IGNIS secara berurutan; jangan mengunduh ketiga part katalog secara paralel karena meningkatkan puncak RAM pada perangkat Android dengan memori terbatas.",
+    "timing_scope": "Waktu ekspor diukur di lingkungan Node/host pengujian, bukan benchmark vivo/Android fisik; waktu aktual pada perangkat dan jaringan pengguna dapat berbeda."
+  },
+  "limitations": [
+    "Uji klik UI end-to-end di browser grafis dan pengujian pada perangkat Android fisik tidak dapat diselesaikan di lingkungan pemeriksaan ini.",
+    "Uji HTTP lokal membuktikan struktur path dan respons file; hasil tersebut bukan jaminan konfigurasi domain/CDN/hosting eksternal."
+  ],
+  "assets": {
+    "catalog.part-1.bin": {
+      "bytes": 20971520,
+      "sha256": "b0606a4454f3326cd7ee8b960d7ae608ceca17faa68533e7a89225e9f46a9215",
+      "unchanged_from_source": true
+    },
+    "catalog.part-2.bin": {
+      "bytes": 20971520,
+      "sha256": "2eada9cf03fe6ba081724345fe2fd5f822253fc3140069cb25ebdd31e48e6714",
+      "unchanged_from_source": true
+    },
+    "catalog.part-3.bin": {
+      "bytes": 10920346,
+      "sha256": "d7022fe1963ba9dc07e4edb9ec42a7b427cf3fad5cb539de3cf353a54258e208",
+      "unchanged_from_source": true
+    },
+    "export-f5626d75adfe-0.gz": {
+      "bytes": 16000000,
+      "sha256": "1832790373d32ec2591c459c69969fc3eed0847e715c442da8ac838c646963a0",
+      "unchanged_from_source": true
+    },
+    "export-f5626d75adfe-1.gz": {
+      "bytes": 10621670,
+      "sha256": "d73ed2527e13a571b40fda473355f7107054411fe685f7038b28a124e87907ec",
+      "unchanged_from_source": true
+    },
+    "ignis-lzma-worker.js": {
+      "bytes": 25381,
+      "sha256": "b1d0d23a7085efe33c9f7409cbf0f32e040183fb6b4c34ab2d22a861ee2c55fc",
+      "unchanged_from_source": true
+    },
+    "ignis-runtime-lzma-worker-v2.gz": {
+      "bytes": 23177867,
+      "sha256": "fdcac765c4807b17c91163c7055094a1da4723980b14dadf5a01ba433cb1160f",
+      "unchanged_from_source": true
+    },
+    "wardrobe-b6178fca57b6.gz": {
+      "bytes": 197175,
+      "sha256": "615cf22444740ca86527b242e4f7156454a0d32a73a1ae9a4a60148a0c795620",
+      "unchanged_from_source": true
+    }
+  }
+}
